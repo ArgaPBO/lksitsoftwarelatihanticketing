@@ -32,7 +32,7 @@ public class CRUDpetugas extends javax.swing.JFrame {
     
     public void judul() {
         String[] judul = {
-            "ID","Kode","Jumlah Kursi","Keterangan","Tipe Transportasi"
+            "ID","Username","Password","Nama","Level"
         };
         tabmodel = new DefaultTableModel(null, judul);
         table_penumpang.setModel(tabmodel);
@@ -44,13 +44,13 @@ public class CRUDpetugas extends javax.swing.JFrame {
             " "
         };
         combomodel = new DefaultComboBoxModel(selects);
-        combo_tipetransportasi.setModel(combomodel);
+        combo_level.setModel(combomodel);
         try {
             Statement stat = conn.createStatement();
-            ResultSet resu = stat.executeQuery("SELECT id_type_transportasi,nama_type FROM type_transportasi");
+            ResultSet resu = stat.executeQuery("SELECT id_level,nama_level FROM level");
             while (resu.next()) {
-                arraytype.add(resu.getInt("id_type_transportasi"));
-                combomodel.addElement(resu.getString("nama_type"));
+                arraytype.add(resu.getInt("id_level"));
+                combomodel.addElement(resu.getString("nama_level"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,20 +63,20 @@ public class CRUDpetugas extends javax.swing.JFrame {
             Statement stat = conn.createStatement();
             tabmodel.getDataVector().removeAllElements();
             tabmodel.fireTableDataChanged();
-            ResultSet resu = stat.executeQuery("SELECT * FROM transportasi");
+            ResultSet resu = stat.executeQuery("SELECT * FROM petugas");
             while (resu.next()) {
                     String type = null;
                     Statement sta1 = conn.createStatement();
-                    ResultSet res1 = sta1.executeQuery("SELECT nama_type FROM type_transportasi WHERE id_type_transportasi="+resu.getString("id_type_transportasi"));
+                    ResultSet res1 = sta1.executeQuery("SELECT nama_level FROM level WHERE id_level="+resu.getString("id_level"));
                     Boolean res2 = res1.next();
                     if (res2==true) {
-                        type=res1.getString("nama_type");
+                        type=res1.getString("nama_level");
                     }
                 Object[] data = {
-                    resu.getInt("id_transportasi"),
-                    resu.getString("kode"),
-                    resu.getInt("jumlah_kursi"),
-                    resu.getString("keterangan"),
+                    resu.getInt("id_petugas"),
+                    resu.getString("username"),
+                    resu.getString("password"),
+                    resu.getString("nama_petugas"),
                     type
                 };
                 tabmodel.addRow(data);
@@ -126,18 +126,17 @@ public class CRUDpetugas extends javax.swing.JFrame {
         table_penumpang = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        txt_kode = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txt_keterangan = new javax.swing.JTextArea();
-        combo_tipetransportasi = new javax.swing.JComboBox<>();
-        txt_jumlahkursi = new javax.swing.JFormattedTextField();
+        txt_username = new javax.swing.JTextField();
+        combo_level = new javax.swing.JComboBox<>();
         btn_Add = new javax.swing.JButton();
         btn_Update = new javax.swing.JButton();
         btn_Delete = new javax.swing.JButton();
         Back = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txt_password = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txt_namapetugas = new javax.swing.JTextField();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -167,23 +166,13 @@ public class CRUDpetugas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table_penumpang);
 
-        jLabel1.setText("Transportasi");
+        jLabel1.setText("Petugas");
 
-        jLabel2.setText("Kode");
+        jLabel2.setText("Username");
 
-        jLabel7.setText("Keterangan");
+        jLabel9.setText("Level");
 
-        jLabel9.setText("Tipe Transportasi");
-
-        jLabel10.setText("Jumlah Kursi");
-
-        txt_keterangan.setColumns(20);
-        txt_keterangan.setRows(5);
-        jScrollPane3.setViewportView(txt_keterangan);
-
-        combo_tipetransportasi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Laki-Laki", "Perempuan" }));
-
-        txt_jumlahkursi.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
+        combo_level.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Laki-Laki", "Perempuan" }));
 
         btn_Add.setText("Add");
         btn_Add.addActionListener(new java.awt.event.ActionListener() {
@@ -215,44 +204,43 @@ public class CRUDpetugas extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Password");
+
+        jLabel5.setText("Nama");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(combo_level, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                        .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btn_Delete)
+                            .addComponent(btn_Add))
+                        .addGap(254, 254, 254)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_jumlahkursi, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(jLabel7)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(combo_tipetransportasi, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
-                                .addComponent(txt_kode, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btn_Delete)
-                                    .addComponent(btn_Add))
-                                .addGap(254, 254, 254)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btn_Update)
-                                    .addComponent(Back))))
-                        .addGap(18, 18, 18)))
+                            .addComponent(btn_Update)
+                            .addComponent(Back)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
+                        .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+                        .addComponent(txt_namapetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(89, 89, 89)
@@ -270,19 +258,19 @@ public class CRUDpetugas extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txt_kode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(txt_jumlahkursi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel7)
+                            .addComponent(jLabel3)
+                            .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txt_namapetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(199, 199, 199)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(combo_tipetransportasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(combo_level, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_Add)
@@ -300,7 +288,7 @@ public class CRUDpetugas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 33, Short.MAX_VALUE))
+                .addGap(0, 2, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,7 +312,7 @@ public class CRUDpetugas extends javax.swing.JFrame {
         try {
             System.out.println("asdasdaaa");
             Statement stat = conn.createStatement();
-            String query = "INSERT INTO transportasi VALUES(NULL,'"+txt_kode.getText()+"','"+txt_jumlahkursi.getText()+"','"+txt_keterangan.getText()+"',"+arraytype.get(combo_tipetransportasi.getSelectedIndex()-1)+")";
+            String query = "INSERT INTO petugas VALUES(NULL,'"+txt_username.getText()+"','"+txt_password.getText()+"','"+txt_namapetugas.getText()+"',"+arraytype.get(combo_level.getSelectedIndex()-1)+")";
             System.out.println(query);
             stat.executeUpdate(query);
             showData();
@@ -343,15 +331,15 @@ public class CRUDpetugas extends javax.swing.JFrame {
         try {
             System.out.println("asdasdaaa");
             Statement stat = conn.createStatement();
-            String query = "SELECT * FROM transportasi WHERE id_transportasi="+table_penumpang.getValueAt(table_penumpang.getSelectedRow(), 0).toString();
+            String query = "SELECT * FROM petugas WHERE id_petugas="+table_penumpang.getValueAt(table_penumpang.getSelectedRow(), 0).toString();
             System.out.println(query);
             ResultSet resu = stat.executeQuery(query);
             if (resu.next()==true) {
                 selected = resu.getInt("id_transportasi");
-                txt_kode.setText(resu.getString("kode"));
-                txt_jumlahkursi.setText(resu.getString("jumlah_kursi"));
-                txt_keterangan.setText(resu.getString("keterangan"));
-                combo_tipetransportasi.setSelectedIndex(arraytype.indexOf(resu.getInt("id_type_transportasi"))+1);
+                txt_username.setText(resu.getString("username"));
+                txt_password.setText(resu.getString("password"));
+                txt_namapetugas.setText(resu.getString("nama_petugas"));
+                combo_level.setSelectedIndex(arraytype.indexOf(resu.getInt("id_level"))+1);
             }
             showData();
             ebutton(true);
@@ -390,12 +378,12 @@ public class CRUDpetugas extends javax.swing.JFrame {
         try {
             System.out.println("asdasdaaa");
             Statement stat = conn.createStatement();
-            String query = "UPDATE transportasi SET "
-                    + "kode='"+txt_kode.getText()+"', "
-                    + "jumlah_kursi="+Integer.parseInt(txt_jumlahkursi.getText())+", "
-                    + "keterangan='"+txt_keterangan.getText()+"', "
-                    + "id_type_transportasi="+arraytype.get(combo_tipetransportasi.getSelectedIndex()-1)+" "
-                    + "WHERE id_transportasi="+selected;
+            String query = "UPDATE petugas SET "
+                    + "username='"+txt_username.getText()+"', "
+                    + "password='"+txt_password.getText()+"', "
+                    + "nama_petugas='"+txt_namapetugas.getText()+"', "
+                    + "id_level="+arraytype.get(combo_level.getSelectedIndex()-1)+" "
+                    + "WHERE id_level="+selected;
             System.out.println(query);
             stat.executeUpdate(query);
             showData();
@@ -414,7 +402,7 @@ public class CRUDpetugas extends javax.swing.JFrame {
         try {
             System.out.println("asdasdaaa");
             Statement stat = conn.createStatement();
-            String query = "DELETE FROM transportasi WHERE id_transportasi="+selected;
+            String query = "DELETE FROM petugas WHERE id_petugas="+selected;
             System.out.println(query);
             stat.executeUpdate(query);
             showData();
@@ -492,22 +480,21 @@ public class CRUDpetugas extends javax.swing.JFrame {
     private javax.swing.JButton btn_Add;
     private javax.swing.JButton btn_Delete;
     private javax.swing.JButton btn_Update;
-    private javax.swing.JComboBox<String> combo_tipetransportasi;
+    private javax.swing.JComboBox<String> combo_level;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable table_penumpang;
-    private javax.swing.JFormattedTextField txt_jumlahkursi;
-    private javax.swing.JTextArea txt_keterangan;
-    private javax.swing.JTextField txt_kode;
+    private javax.swing.JTextField txt_namapetugas;
+    private javax.swing.JTextField txt_password;
+    private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 }

@@ -185,11 +185,11 @@ public class CRUD extends javax.swing.JFrame {
 
     private void petugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_petugasActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        CRUDpetugas a = new CRUDpetugas();
-        a.setVisible(true);
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        this.dispose();
+//        this.setVisible(false);
+//        CRUDpetugas a = new CRUDpetugas();
+//        a.setVisible(true);
+//        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+//        this.dispose();
     }//GEN-LAST:event_petugasActionPerformed
 
     private void ruteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ruteActionPerformed

@@ -139,7 +139,7 @@ public class LoginPetugas extends javax.swing.JFrame {
         Statement stat;
         try {
             stat = conn.createStatement();
-            ResultSet resu=stat.executeQuery("SELECT username,password FROM test1 WHERE username='"+username+"' LIMIT 1");
+            ResultSet resu=stat.executeQuery("SELECT username,password FROM petugas WHERE username='"+username+"' LIMIT 1");
             boolean c = resu.next();
             if (c==true) {
                 if (resu.getString("password").equals(password)) {
