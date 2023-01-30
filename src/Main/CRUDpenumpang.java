@@ -7,7 +7,10 @@ import Config.DbConfig;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +22,9 @@ public class CRUDpenumpang extends javax.swing.JFrame {
     Connection conn=DbConfig.getConnection();
     DefaultTableModel tabmodel;
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    Integer selected = null;
+    String updatetext = "Update";
+    String deletetext = "Delete";
     
     public void judul() {
         String[] judul = {
@@ -51,6 +57,18 @@ public class CRUDpenumpang extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void ebutton(Boolean p) {
+        if (p==true) {
+            btn_Update.setText(updatetext+" ("+selected+")");
+            btn_Delete.setText(deletetext+" ("+selected+")");
+        } else {
+            selected = null;
+            btn_Update.setText(updatetext);
+            btn_Delete.setText(deletetext);
+        }
+        btn_Update.setEnabled(p);
+        btn_Delete.setEnabled(p);
     }
     /**
      * Creates new form CRUD
@@ -94,9 +112,9 @@ public class CRUDpenumpang extends javax.swing.JFrame {
         combo_jeniskelamin = new javax.swing.JComboBox<>();
         txt_telefone = new javax.swing.JFormattedTextField();
         btn_Add = new javax.swing.JButton();
-        Update = new javax.swing.JButton();
-        Delete = new javax.swing.JButton();
-        Back = new javax.swing.JButton();
+        btn_Update = new javax.swing.JButton();
+        btn_Delete = new javax.swing.JButton();
+        btn_Back = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -119,6 +137,11 @@ public class CRUDpenumpang extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table_penumpang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_penumpangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table_penumpang);
 
         jLabel1.setText("Penumpang");
@@ -158,11 +181,26 @@ public class CRUDpenumpang extends javax.swing.JFrame {
             }
         });
 
-        Update.setText("Update");
+        btn_Update.setText("Update");
+        btn_Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_UpdateActionPerformed(evt);
+            }
+        });
 
-        Delete.setText("Delete");
+        btn_Delete.setText("Delete");
+        btn_Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DeleteActionPerformed(evt);
+            }
+        });
 
-        Back.setText("Back");
+        btn_Back.setText("Back");
+        btn_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -194,12 +232,12 @@ public class CRUDpenumpang extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 8, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(Delete)
+                                    .addComponent(btn_Delete)
                                     .addComponent(btn_Add))
                                 .addGap(254, 254, 254)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(Update)
-                                    .addComponent(Back)))
+                                    .addComponent(btn_Update)
+                                    .addComponent(btn_Back)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -259,11 +297,11 @@ public class CRUDpenumpang extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_Add)
-                            .addComponent(Update))
+                            .addComponent(btn_Update))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Delete)
-                            .addComponent(Back))))
+                            .addComponent(btn_Delete)
+                            .addComponent(btn_Back))))
                 .addGap(17, 17, 17))
         );
 
@@ -310,6 +348,88 @@ public class CRUDpenumpang extends javax.swing.JFrame {
 //        
 //        JOptionPane.showMessageDialog(this, formatter.format(date_tanggallahir.getDate()));
     }//GEN-LAST:event_btn_AddActionPerformed
+
+    private void btn_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BackActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        CRUD a = new CRUD();
+        a.setVisible(true);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_btn_BackActionPerformed
+
+    private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed
+        // TODO add your handling code here:
+        if (selected != null) {
+            String kelamin = null;
+        if (combo_jeniskelamin.getSelectedIndex() == 1) {
+            kelamin = "Laki-laki";
+        } else if (combo_jeniskelamin.getSelectedIndex() == 2) {
+            kelamin = "Perempuan";
+        }
+        try {
+            System.out.println("asdasdaaa");
+            Statement stat = conn.createStatement();
+            String query = "UPDATE penumpang SET "
+                    + "username='"+txt_username.getText()+"', "
+                    + "password='"+txt_password.getText()+"', "
+                    + "nama_penumpang='"+txt_namapenumpang.getText()+"', "
+                    + "alamat_penumpang='"+txt_alamatpenumpang.getText()+"', "
+                    + "tanggal_lahir='"+formatter.format(date_tanggallahir.getDate())+"', "
+                    + "jenis_kelamin='"+kelamin+"', "
+                    + "telefone='"+txt_telefone.getText()+"' "
+                    + "WHERE id_transportasi="+selected;
+            System.out.println(query);
+            stat.executeUpdate(query);
+            showData();
+        } catch (Exception e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e);
+        }
+        }
+        
+    }//GEN-LAST:event_btn_UpdateActionPerformed
+
+    private void table_penumpangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_penumpangMouseClicked
+        // TODO add your handling code here:
+                selected = Integer.parseInt(table_penumpang.getValueAt(table_penumpang.getSelectedRow(), 0).toString());
+        txt_username.setText(table_penumpang.getValueAt(table_penumpang.getSelectedRow(), 1).toString());
+        txt_password.setText(table_penumpang.getValueAt(table_penumpang.getSelectedRow(), 2).toString());
+        txt_namapenumpang.setText(table_penumpang.getValueAt(table_penumpang.getSelectedRow(), 3).toString());
+        txt_alamatpenumpang.setText(table_penumpang.getValueAt(table_penumpang.getSelectedRow(), 4).toString());
+        try {
+            date_tanggallahir.setDate(formatter.parse(table_penumpang.getValueAt(table_penumpang.getSelectedRow(), 5).toString()));
+        } catch (ParseException ex) {
+            Logger.getLogger(CRUDpenumpang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (table_penumpang.getValueAt(table_penumpang.getSelectedRow(), 6).toString().equals("Laki-laki")) {
+            combo_jeniskelamin.setSelectedIndex(1);
+        } else if (table_penumpang.getValueAt(table_penumpang.getSelectedRow(), 6).toString().equals("Perempuan")) {
+            combo_jeniskelamin.setSelectedIndex(2);
+        }
+        txt_telefone.setText(table_penumpang.getValueAt(table_penumpang.getSelectedRow(), 0).toString());
+        ebutton(true);
+    }//GEN-LAST:event_table_penumpangMouseClicked
+
+    private void btn_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DeleteActionPerformed
+        // TODO add your handling code here:
+        if (selected != null) {
+            
+        try {
+            System.out.println("asdasdaaa");
+            Statement stat = conn.createStatement();
+            String query = "DELETE FROM penumpang WHERE id_penumpang="+selected;
+            System.out.println(query);
+            stat.executeUpdate(query);
+            showData();
+            ebutton(false);
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e);
+        }
+        }
+    }//GEN-LAST:event_btn_DeleteActionPerformed
     
     
     /**
@@ -351,10 +471,10 @@ public class CRUDpenumpang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Back;
-    private javax.swing.JButton Delete;
-    private javax.swing.JButton Update;
     private javax.swing.JButton btn_Add;
+    private javax.swing.JButton btn_Back;
+    private javax.swing.JButton btn_Delete;
+    private javax.swing.JButton btn_Update;
     private javax.swing.JComboBox<String> combo_jeniskelamin;
     private com.toedter.calendar.JDateChooser date_tanggallahir;
     private javax.swing.JLabel jLabel1;
