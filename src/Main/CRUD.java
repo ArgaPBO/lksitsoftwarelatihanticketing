@@ -30,6 +30,10 @@ public class CRUD extends javax.swing.JFrame {
         btn_penumpang = new javax.swing.JButton();
         btn_type_transportasi = new javax.swing.JButton();
         btn_transportasi = new javax.swing.JButton();
+        btn_level = new javax.swing.JButton();
+        petugas = new javax.swing.JButton();
+        rute = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,18 +60,56 @@ public class CRUD extends javax.swing.JFrame {
             }
         });
 
+        btn_level.setText("level");
+        btn_level.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_levelActionPerformed(evt);
+            }
+        });
+
+        petugas.setText("petugas");
+        petugas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                petugasActionPerformed(evt);
+            }
+        });
+
+        rute.setText("rute");
+        rute.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ruteActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(150, 150, 150)
-                .addComponent(btn_penumpang)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_penumpang)
+                    .addComponent(btn_level))
                 .addGap(90, 90, 90)
-                .addComponent(btn_type_transportasi)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_type_transportasi)
+                    .addComponent(petugas))
                 .addGap(141, 141, 141)
-                .addComponent(btn_transportasi)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rute)
+                    .addComponent(btn_transportasi))
                 .addContainerGap(315, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,7 +119,14 @@ public class CRUD extends javax.swing.JFrame {
                     .addComponent(btn_penumpang)
                     .addComponent(btn_type_transportasi)
                     .addComponent(btn_transportasi))
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addGap(57, 57, 57)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_level)
+                    .addComponent(petugas)
+                    .addComponent(rute))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -125,6 +174,42 @@ public class CRUD extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_transportasiActionPerformed
 
+    private void btn_levelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_levelActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        CRUDlevel a = new CRUDlevel();
+        a.setVisible(true);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_btn_levelActionPerformed
+
+    private void petugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_petugasActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        CRUDpetugas a = new CRUDpetugas();
+        a.setVisible(true);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_petugasActionPerformed
+
+    private void ruteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ruteActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        CRUDrute a = new CRUDrute();
+        a.setVisible(true);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_ruteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        LoginPetugas a = new LoginPetugas();
+        a.setVisible(true);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -161,32 +246,13 @@ public class CRUD extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Back;
-    private javax.swing.JButton btn_Add;
-    private javax.swing.JButton btn_Delete;
-    private javax.swing.JButton btn_Update;
+    private javax.swing.JButton btn_level;
     private javax.swing.JButton btn_penumpang;
     private javax.swing.JButton btn_transportasi;
     private javax.swing.JButton btn_type_transportasi;
-    private javax.swing.JComboBox<String> combo_jeniskelamin;
-    private com.toedter.calendar.JDateChooser date_tanggallahir;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable table_penumpang;
-    private javax.swing.JTextArea txt_alamatpenumpang;
-    private javax.swing.JTextField txt_namapenumpang;
-    private javax.swing.JTextField txt_password;
-    private javax.swing.JFormattedTextField txt_telefone;
-    private javax.swing.JTextField txt_username;
+    private javax.swing.JButton petugas;
+    private javax.swing.JButton rute;
     // End of variables declaration//GEN-END:variables
 }

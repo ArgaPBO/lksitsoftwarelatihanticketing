@@ -13,13 +13,13 @@ import javax.swing.JOptionPane;
  *
  * @author Arga 'Ahmad Mujahidin' Herlambang
  */
-public class Login extends javax.swing.JFrame {
+public class LoginPetugas extends javax.swing.JFrame {
 
     Connection conn=DbConfig.getConnection();
     /**
      * Creates new form Login
      */
-    public Login() {
+    public LoginPetugas() {
         initComponents();
     }
 
@@ -39,11 +39,11 @@ public class Login extends javax.swing.JFrame {
         txt_password = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btn_login = new javax.swing.JButton();
-        btn_petugas = new javax.swing.JButton();
+        btn_back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Login");
+        jLabel1.setText("Login Petugas");
 
         jLabel2.setText("Username");
 
@@ -56,10 +56,10 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btn_petugas.setText("Petugas");
-        btn_petugas.addActionListener(new java.awt.event.ActionListener() {
+        btn_back.setText("Back");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_petugasActionPerformed(evt);
+                btn_backActionPerformed(evt);
             }
         });
 
@@ -89,7 +89,7 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(txt_password))
                         .addGap(246, 246, 246))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_petugas)
+                        .addComponent(btn_back)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -108,7 +108,7 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addComponent(btn_login)
                 .addGap(82, 82, 82)
-                .addComponent(btn_petugas)
+                .addComponent(btn_back)
                 .addContainerGap())
         );
 
@@ -139,11 +139,16 @@ public class Login extends javax.swing.JFrame {
         Statement stat;
         try {
             stat = conn.createStatement();
-            ResultSet resu=stat.executeQuery("SELECT username,password FROM penumpang WHERE username='"+username+"' LIMIT 1");
+            ResultSet resu=stat.executeQuery("SELECT username,password FROM test1 WHERE username='"+username+"' LIMIT 1");
             boolean c = resu.next();
             if (c==true) {
                 if (resu.getString("password").equals(password)) {
                     JOptionPane.showMessageDialog(null, "berhasil login");
+                    this.setVisible(false);
+                    CRUD a = new CRUD();
+                    a.setVisible(true);
+                    this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+                    this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "gagal login");
                 }
@@ -151,7 +156,7 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "username tidak ditemukan");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginPetugas.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
@@ -159,14 +164,14 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btn_loginActionPerformed
 
-    private void btn_petugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_petugasActionPerformed
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        LoginPetugas a = new LoginPetugas();
+        Login a = new Login();
         a.setVisible(true);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.dispose();
-    }//GEN-LAST:event_btn_petugasActionPerformed
+    }//GEN-LAST:event_btn_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,27 +190,28 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPetugas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPetugas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPetugas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPetugas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new LoginPetugas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_login;
-    private javax.swing.JButton btn_petugas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -73,7 +73,7 @@
                           <EmptySpace min="-2" pref="246" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="btn_petugas" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_back" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -98,7 +98,7 @@
                   <EmptySpace pref="96" max="32767" attributes="0"/>
                   <Component id="btn_login" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                  <Component id="btn_petugas" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_back" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -107,7 +107,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Login"/>
+            <Property name="text" type="java.lang.String" value="Login Petugas"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_username">
@@ -132,12 +132,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_loginActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_petugas">
+        <Component class="javax.swing.JButton" name="btn_back">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Petugas"/>
+            <Property name="text" type="java.lang.String" value="Back"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_petugasActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_backActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

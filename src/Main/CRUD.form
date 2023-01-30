@@ -51,12 +51,26 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
-                  <Component id="btn_penumpang" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btn_penumpang" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_level" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btn_type_transportasi" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btn_type_transportasi" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="petugas" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
-                  <Component id="btn_transportasi" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="rute" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_transportasi" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace pref="315" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -69,7 +83,15 @@
                       <Component id="btn_type_transportasi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_transportasi" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="313" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btn_level" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="petugas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rute" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="192" max="32767" attributes="0"/>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -97,6 +119,38 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_transportasiActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_level">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="level"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_levelActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="petugas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="petugas"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="petugasActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="rute">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="rute"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ruteActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Back"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
