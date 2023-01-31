@@ -145,7 +145,7 @@ public class Login extends javax.swing.JFrame {
                 if (resu.getString("password").equals(password)) {
                     JOptionPane.showMessageDialog(null, "berhasil login");
                     this.setVisible(false);
-                    PesanTicket a = new PesanTicket(resu.getInt("id_penumpang"),resu.getString("nama_penumpang"));
+                    Menu a = new Menu(resu.getInt("id_penumpang"),resu.getString("nama_penumpang"));
                     a.setVisible(true);
                     this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
                     this.dispose();

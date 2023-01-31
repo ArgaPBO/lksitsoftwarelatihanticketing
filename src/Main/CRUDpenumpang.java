@@ -378,7 +378,7 @@ public class CRUDpenumpang extends javax.swing.JFrame {
                     + "tanggal_lahir='"+formatter.format(date_tanggallahir.getDate())+"', "
                     + "jenis_kelamin='"+kelamin+"', "
                     + "telefone='"+txt_telefone.getText()+"' "
-                    + "WHERE id_transportasi="+selected;
+                    + "WHERE id_penumpang="+selected;
             System.out.println(query);
             stat.executeUpdate(query);
             showData();
