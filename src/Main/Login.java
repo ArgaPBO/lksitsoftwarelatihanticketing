@@ -139,11 +139,16 @@ public class Login extends javax.swing.JFrame {
         Statement stat;
         try {
             stat = conn.createStatement();
-            ResultSet resu=stat.executeQuery("SELECT username,password FROM penumpang WHERE username='"+username+"' LIMIT 1");
+            ResultSet resu=stat.executeQuery("SELECT id_penumpang,username,password,nama_penumpang FROM penumpang WHERE username='"+username+"' LIMIT 1");
             boolean c = resu.next();
             if (c==true) {
                 if (resu.getString("password").equals(password)) {
                     JOptionPane.showMessageDialog(null, "berhasil login");
+                    this.setVisible(false);
+                    PesanTicket a = new PesanTicket(resu.getInt("id_penumpang"),resu.getString("nama_penumpang"));
+                    a.setVisible(true);
+                    this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+                    this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "gagal login");
                 }
